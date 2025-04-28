@@ -1,7 +1,7 @@
 # main.py
 #
 # Flask application to run a web-based calculator.
-# Handles user input, forwards tasks to the responsible modules, and renders the results.
+# Handles user input, forwards tasks to the responsible modules, and renders the page.
 #
 # Author: Lawan Mai
 # Created: 28.04.2025
@@ -24,18 +24,16 @@ app = Flask(__name__)
 def index():
     result = None
     if request.method == "POST":
-        num1 = float(request.form["num1"])
-        num2 = float(request.form["num2"])
-        operation = request.form["operation"]
+        function = request.form.get("function")
 
         # calculate
-        result = calculate(num1, num2, operation)
+        result = calculate(function)
 
         # Save calculation to the database
         conn = get_db_connection()
         conn.execute(
-            "INSERT INTO calculations (num1, num2, operation, result) VALUES (?, ?, ?, ?)",
-            (num1, num2, operation, result),
+            "INSERT INTO calculations (function, result) VALUES (?, ?)",
+            (function, result),
         )
         conn.commit()
         conn.close()

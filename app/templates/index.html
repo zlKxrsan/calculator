@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <div class="container">
+        <h1>Calculator</h1>
+        <form method="POST" action="/">
+            <input type="text" id="function" name="function" readonly>
+
+            <div class="button-grid">
+                {% for btn in ['1', '2', '3', '+', '4', '5', '6', '-', '7', '8', '9', '*', '0', '(', ')', '/', 'ANS',
+                '⌫', 'C', '='] %}
+                {% if btn == '=' %}
+                <button type="submit">{{ btn }}</button>
+                {% else %}
+                <button type="button" onclick="handleButton('{{ btn }}')">{{ btn }}</button>
+                {% endif %}
+                {% endfor %}
+            </div>
+        </form>
+
+        <h2>History</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Function</th>
+                    <th>Result</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for entry in history %}
+                <tr>
+                    <td>{{ entry.id }}</td>
+                    <td>{{ entry.function }}</td>
+                    <td>{{ entry.result }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        let lastResult = "{{ result if result is not none else '' }}";
+        let placeholderText = lastResult || "Enter a function!";
+
+        document.addEventListener("DOMContentLoaded", () => {
+            const output = document.getElementById("function");
+            output.placeholder = placeholderText;
+        });
+
+        function handleButton(value) {
+            const output = document.getElementById("function");
+
+            if (value === 'C') {
+                output.value = "";
+            } else if (value === '⌫') {
+                output.value = output.value.slice(0, -1);
+            } else if (value === 'ANS') {
+                output.value += lastResult;
+            } else {
+                output.value += value;
+                if (output.value.length > 50) {
+                    output.value = output.value.slice(0, 50);
+                }
+            }
+        }
+    </script>
+
+</body>
+
+</html>

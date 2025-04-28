@@ -4,7 +4,7 @@
 #
 # Author: Lawan Mai
 # Created: 28.04.2025
-# Version: 1.0
+# Version: 1.1
 
 import sqlite3
 import os
@@ -27,9 +27,7 @@ def init_db():
                 """
                 CREATE TABLE calculations (
                     id INTEGER PRIMARY KEY AUTOINCREMENT,
-                    num1 REAL NOT NULL,
-                    num2 REAL NOT NULL,
-                    operation TEXT NOT NULL,
+                    function TEXT NOT NULL,
                     result TEXT NOT NULL
                 )
             """
