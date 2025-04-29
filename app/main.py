@@ -5,18 +5,25 @@
 #
 # Author: Lawan Mai
 # Created: 28.04.2025
-# Version: 1.0
+# Version: 1.1
 
 
 from flask import Flask, request, render_template
 import sqlite3
 import os
 
-from database import get_db_connection, init_db
-from calculator import calculate
+from app.database import get_db_connection, init_db
+from app.calculator import calculate
 
-# Create Flask app
-app = Flask(__name__)
+
+# Create Flask app and initialize database
+def create_app():
+    init_db()
+    app = Flask(__name__)
+    return app
+
+
+app = create_app()
 
 
 # Route: Homepage
@@ -48,5 +55,5 @@ def index():
 
 # run the app
 if __name__ == "__main__":
-    init_db()
+    create_app()
     app.run(host="0.0.0.0", port=5000, debug=True)

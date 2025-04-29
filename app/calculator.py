@@ -8,6 +8,7 @@
 # Version: 1.1
 
 
+# This module provides a function to perform basic arithmetic calculations
 def calculate(function):
     try:
         result = eval(function)
