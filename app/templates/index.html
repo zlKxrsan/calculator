@@ -9,23 +9,29 @@
 </head>
 
 <body>
-
     <div class="container">
-        <h1>Calculator</h1>
-        <form method="POST" action="/">
-            <input type="text" id="function" name="function" readonly>
+        <div class="container">
+            <form method="POST" action="/">
+                <input type="text" id="function" name="function" readonly>
 
-            <div class="button-grid">
-                {% for btn in ['1', '2', '3', '+', '4', '5', '6', '-', '7', '8', '9', '*', '0', '(', ')', '/', 'ANS',
-                '⌫', 'C', '='] %}
-                {% if btn == '=' %}
-                <button type="submit">{{ btn }}</button>
-                {% else %}
-                <button type="button" onclick="handleButton('{{ btn }}')">{{ btn }}</button>
-                {% endif %}
-                {% endfor %}
-            </div>
-        </form>
+                <div class="button-grid">
+                    {% for btn in ['C', '⌫', 'ANS', '/', '7', '8', '9', '*', '4', '5', '6', '-', '1', '2', '3', '+',
+                    '0', '.', '='] %}
+                    {% if btn == '=' %}
+                    <button type="submit" class="operator">{{ btn }}</button>
+                    {% elif btn in ['+', '-', '*', '/'] %}
+                    <button type="button" class="operator" onclick="handleButton('{{ btn }}')">{{ btn }}</button>
+                    {% elif btn in ['C', '⌫', 'ANS'] %}
+                    <button type="button" class="special" onclick="handleButton('{{ btn }}')">{{ btn }}</button>
+                    {% elif btn == '0' %}
+                    <button type="button" class="zero" onclick="handleButton('{{ btn }}')">{{ btn }}</button>
+                    {% else %}
+                    <button type="button" onclick="handleButton('{{ btn }}')">{{ btn }}</button>
+                    {% endif %}
+                    {% endfor %}
+                </div>
+            </form>
+        </div>
 
         <h2>History</h2>
         <table>
@@ -74,7 +80,6 @@
             }
         }
     </script>
-
 </body>
 
 </html>
