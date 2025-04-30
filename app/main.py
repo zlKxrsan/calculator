@@ -12,8 +12,8 @@ from flask import Flask, request, render_template
 import sqlite3
 import os
 
-from app.database import get_db_connection, init_db
-from app.calculator import calculate
+from .database import get_db_connection, init_db
+from .calculator import calculate
 
 
 # Create Flask app and initialize database

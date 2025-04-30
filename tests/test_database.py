@@ -7,14 +7,6 @@ from app.database import get_db_connection, init_db
 TEST_DATABASE = "test_calculator.db"
 
 
-@pytest.fixture(scope="session", autouse=True)
-def cleanup_test_database():
-    # Ensure the test database is removed after all tests
-    yield
-    if os.path.exists(TEST_DATABASE):
-        os.remove(TEST_DATABASE)
-
-
 def test_get_db_connection():
     # Test if the database connection is created successfully
     conn = get_db_connection(TEST_DATABASE)
@@ -22,6 +14,8 @@ def test_get_db_connection():
         assert isinstance(conn, sqlite3.Connection)
     finally:
         conn.close()
+
+    os.remove(TEST_DATABASE)  # Clean up the test database file
 
 
 def test_init_db_creates_file_and_table():

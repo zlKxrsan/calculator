@@ -14,3 +14,5 @@ Eine kleine Web-App zum Rechnen und Speichern von Ergebnissen in einer Azure SQL
 - Grundrechenarten (+, -, \*, /)
 - Speicherung der Rechenhistorie
 - Docker und Azure Deployment ready
+
+run from root with python -m app.main
