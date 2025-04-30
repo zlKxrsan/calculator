@@ -1,18 +1,30 @@
-# Taschenrechner Web-App
+# Calculator Web App
 
-Eine kleine Web-App zum Rechnen und Speichern von Ergebnissen in einer Azure SQL Datenbank.
+A small web application for performing basic calculations and storing results in a database. The app is containerized with Docker.
 
-## Setup
+## Setup Instructions
+
+### Local Development
+
+1. Clone the repository:
+
+   ```bash
+   git clone https://github.com/your-repo/calculator.git
+   cd calculator
+
+   ```
 
 1. `pip install -r requirements.txt`
-2. `python app/main.py`
-3. Docker Build: `docker build -t calculator-app .`
-4. Docker Run: `docker run -p 5000:5000 calculator-app`
+1. `python -m app.main`
+
+### Docker
+
+1. Docker Build: `docker build -t calculator-app .`
+1. Docker Run: `docker run -p 5000:5000 calculator-app`
+1. Open in localhost:5000
 
 ## Features
 
-- Grundrechenarten (+, -, \*, /)
-- Speicherung der Rechenhistorie
-- Docker und Azure Deployment ready
-
-run from root with python -m app.main
+- basic calculations (+, -, \*, /)
+- Stores results in a history
+- portability through Docker
