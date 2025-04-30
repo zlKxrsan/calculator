@@ -9,7 +9,7 @@ A small web application for performing basic calculations and storing results in
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/your-repo/calculator.git
+   git clone https://github.com/zlKxrsan/calculator.git
    cd calculator
 
    ```
